@@ -1,0 +1,3298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>East West Corporation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        :root {
+            --primary-color: #0c5c46;
+            --secondary-color: #07855a;
+            --accent-color: #63e6be;
+            --gradient-start: #0c5c46;
+            --gradient-end: #07855a;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f5f5f5;
+            --bg-dark: #121212;
+            --card-bg-light: rgba(255, 255, 255, 0.7);
+            --card-bg-dark: rgba(30, 30, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --transition-speed: 0.3s;
+        }
+
+        /* Company Intro Styles for Home Section */
+        .company-intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo-container-main {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container-main img {
+            max-width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s ease;
+        }
+
+        .logo-container-main img:hover {
+            transform: scale(1.05);
+        }
+
+        .company-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(7, 133, 90, 0.05);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .company-description p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        @media (min-width: 768px) {
+            .company-intro {
+                flex-direction: row;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .logo-container-main {
+                flex: 0 0 250px;
+            }
+
+            .company-description {
+                flex: 1;
+                text-align: left;
+                padding-left: 30px;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e0f2ff 100%);
+            transition: background var(--transition-speed) ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0a1a2f 100%);
+            color: var(--text-light);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--text-light);
+            padding: 20px 0;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-light);
+            transition: all var(--transition-speed) ease;
+            z-index: 1000;
+        }
+
+        body.dark-mode .sidebar {
+            background: linear-gradient(180deg, #0c2546 0%, #12407a 100%);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .logo-container {
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        }
+
+        .logo-container img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo-container h2 {
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0 10px;
+        }
+
+        .nav-links li {
+            margin: 5px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .nav-links li.active {
+            background: rgba(255, 255, 255, 0.18);
+            border-left: 4px solid #ffd700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 12px 20px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li a i {
+            margin-right: 10px;
+            font-size: 18px;
+            width: 22px;
+            text-align: center;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .section {
+            background: var(--card-bg-light);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            padding: 30px;
+            margin-bottom: 40px;
+            scroll-margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) ease, transform 0.4s ease;
+            display: none; /* Hide all sections by default */
+            min-height: 80vh; /* Ensure sections take up most of the viewport height */
+        }
+
+        .section.active {
+            display: block !important; /* Show only active section */
+        }
+
+        .section:hover {
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+        }
+
+        /* Page navigation controls */
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .page-navigation {
+            border-top-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        body.dark-mode .nav-button:disabled {
+            background: #555;
+        }
+
+        body.dark-mode .section {
+            background: var(--card-bg-dark);
+            box-shadow: var(--shadow-dark);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            font-size: 28px;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+        }
+
+        body.dark-mode h1 {
+            color: var(--accent-color);
+            border-bottom-color: rgba(100, 181, 246, 0.5);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px 0;
+            font-size: 22px;
+            position: relative;
+            padding-left: 15px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 20px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+
+        body.dark-mode h2 {
+            color: var(--accent-color);
+        }
+
+        body.dark-mode h2::before {
+            background: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 15px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 250px;
+            padding: 25px 20px;
+            margin: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 15px;
+            text-align: center;
+            background: var(--card-bg-light);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.8s ease;
+            opacity: 0;
+        }
+
+        .profile-card:hover::before {
+            left: 100%;
+            opacity: 1;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        body.dark-mode .profile-card {
+            background: var(--card-bg-dark);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .profile-card:hover img {
+            transform: scale(1.08);
+            border-color: rgba(var(--accent-color), 0.5);
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.5);
+        }
+
+        .profile-card h3 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: var(--primary-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        body.dark-mode .profile-card h3 {
+            color: var(--text-light);
+        }
+
+        .profile-card p {
+            font-size: 14px;
+            color: #666;
+            transition: color var(--transition-speed) ease;
+        }
+
+        body.dark-mode .profile-card p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .profiles-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .settings-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--card-bg-light);
+            padding: 15px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-mode .settings-container {
+            background: var(--card-bg-dark);
+        }
+
+        .settings-label {
+            margin-right: 15px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .mode-toggle {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .mode-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--secondary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Financial Table Styles */
+        .financial-container {
+            margin-top: 25px;
+        }
+
+        .financial-overview {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-mode .financial-overview {
+            background: rgba(30, 30, 30, 0.2);
+        }
+
+        .financial-table-container {
+            margin-bottom: 40px;
+            overflow-x: auto;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) ease, transform 0.4s ease;
+        }
+
+        .financial-table-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .financial-table-container {
+            background: rgba(30, 30, 30, 0.2);
+        }
+
+        .financial-table-container h3 {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .financial-table-container h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+        }
+
+        body.dark-mode .financial-table-container h3 {
+            color: var(--accent-color);
+        }
+
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .financial-table th, .financial-table td {
+            border: 1px solid rgba(221, 221, 221, 0.5);
+            padding: 12px 15px;
+            text-align: right;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-mode .financial-table th,
+        body.dark-mode .financial-table td {
+            border-color: rgba(80, 80, 80, 0.5);
+            color: var(--text-light);
+        }
+
+        .financial-table th:first-child, .financial-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .financial-table th {
+            background-color: rgba(242, 242, 242, 0.8);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .financial-table th {
+            background-color: rgba(50, 50, 50, 0.8);
+            color: var(--accent-color);
+        }
+
+        .financial-table tr:nth-child(even) {
+            background-color: rgba(249, 249, 249, 0.5);
+        }
+
+        body.dark-mode .financial-table tr:nth-child(even) {
+            background-color: rgba(40, 40, 40, 0.5);
+        }
+
+        .financial-table tr {
+            transition: all 0.3s ease;
+        }
+
+        .financial-table tr:hover {
+            background-color: rgba(240, 247, 255, 0.8);
+            transform: scale(1.01);
+        }
+
+        body.dark-mode .financial-table tr:hover {
+            background-color: rgba(30, 50, 70, 0.8);
+        }
+
+        .financial-highlights {
+            margin-top: 30px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-mode .financial-highlights {
+            background: rgba(30, 30, 30, 0.2);
+        }
+
+        .financial-highlights h3 {
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .financial-highlights h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+        }
+
+        body.dark-mode .financial-highlights h3 {
+            color: var(--accent-color);
+        }
+
+        .financial-highlights ul {
+            margin-left: 20px;
+        }
+
+        .financial-highlights li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .financial-highlights li:hover {
+            transform: translateX(5px);
+        }
+
+        .financial-highlights li::before {
+            content: '→';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            transition: color var(--transition-speed) ease;
+        }
+
+        body.dark-mode .financial-highlights li::before {
+            color: var(--accent-color);
+        }
+
+        .financial-notes {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(245, 245, 245, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            font-size: 0.95em;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-speed) ease;
+        }
+
+        body.dark-mode .financial-notes {
+            background: rgba(40, 40, 40, 0.7);
+        }
+
+        .annual-reports-dropdown {
+            position: absolute;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: top center;
+            transform: scale(0.8);
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .annual-reports-dropdown.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .dropdown-glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 0;
+            overflow: hidden;
+            min-width: 250px;
+        }
+
+        body.dark-mode .dropdown-glass-panel {
+            background: rgba(30, 30, 30, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-glass-panel h4 {
+            margin: 0;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .annual-reports-dropdown ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .annual-reports-dropdown li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .annual-reports-dropdown li {
+            border-bottom-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .annual-reports-dropdown li:last-child {
+            border-bottom: none;
+        }
+
+        .annual-reports-dropdown li:hover {
+            background: rgba(21, 101, 192, 0.1);
+        }
+
+        body.dark-mode .annual-reports-dropdown li:hover {
+            background: rgba(100, 181, 246, 0.1);
+        }
+
+        .annual-reports-dropdown a {
+            padding: 0;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            height: 50px;
+        }
+
+        body.dark-mode .annual-reports-dropdown a {
+            color: var(--text-light);
+        }
+
+        .annual-reports-dropdown .year {
+            background: rgba(21, 101, 192, 0.1);
+            color: var(--primary-color);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .annual-reports-dropdown .year {
+            background: rgba(100, 181, 246, 0.1);
+            color: var(--accent-color);
+        }
+
+        .annual-reports-dropdown a:hover .year {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .annual-reports-dropdown a:hover .year {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+        }
+
+        .annual-reports-dropdown .report-info {
+            padding: 0 15px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .annual-reports-dropdown .report-info i {
+            font-size: 12px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .annual-reports-dropdown a:hover .report-info i {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        .annual-reports-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(21, 101, 192, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode .annual-reports-link {
+            color: var(--accent-color);
+            background: rgba(100, 181, 246, 0.1);
+        }
+
+        .annual-reports-link:hover {
+            background: rgba(21, 101, 192, 0.2);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .annual-reports-link:hover {
+            background: rgba(100, 181, 246, 0.2);
+        }
+
+        .annual-reports-link::after {
+            content: '\f0d7';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            margin-left: 6px;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+
+        .annual-reports-link:hover::after {
+            transform: translateY(2px);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .animated-bg span {
+            position: absolute;
+            display: block;
+            background: linear-gradient(45deg, var(--accent-color), transparent);
+            border-radius: 50%;
+            animation: move-bg 15s linear infinite;
+            opacity: 0.1;
+        }
+
+        .animated-bg span:nth-child(1) {
+            width: 60vw;
+            height: 60vw;
+            left: -30vw;
+            top: -30vw;
+            animation-delay: 0s;
+        }
+
+        .animated-bg span:nth-child(2) {
+            width: 70vw;
+            height: 70vw;
+            right: -35vw;
+            bottom: -35vw;
+            animation-delay: 5s;
+        }
+
+        .animated-bg span:nth-child(3) {
+            width: 40vw;
+            height: 40vw;
+            right: 20vw;
+            top: 30vh;
+            animation-delay: 10s;
+        }
+
+        @keyframes move-bg {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10vh) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+
+        .loader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-inner {
+            width: 100px;
+            height: 100px;
+            border: 5px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 250px;
+            }
+
+            .main-content {
+                margin-left: 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 0;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                width: 250px;
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 20px;
+            }
+
+            .profiles-container {
+                gap: 10px;
+            }
+
+            .profile-card {
+                width: calc(50% - 20px);
+            }
+
+            .financial-table {
+                font-size: 0.85em;
+            }
+
+            .financial-table th, .financial-table td {
+                padding: 8px 5px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-card {
+                width: 100%;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-inner"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Mobile Menu Toggle
+    <div class="menu-toggle" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 1001; background: var(--primary-color); color: white; width: 40px; height: 40px; border-radius: 5px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        <i class="fas fa-bars"></i>
+    </div> -->
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Tp3X3YMD9E6KfJn2T8kxhnYxweChUw5IuA&s" alt="East West Corporation Logo">
+            <h2>East West Corporation</h2>
+        </div>
+
+        <ul class="nav-links">
+            <li class="nav-item active" data-section="home"><a href="javascript:void(0)"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item" data-section="background"><a href="javascript:void(0)"><i class="fas fa-history"></i> Background & History</a></li>
+            <li class="nav-item" data-section="profile"><a href="javascript:void(0)"><i class="fas fa-id-card"></i> Corporate Profile</a></li>
+            <li class="nav-item" data-section="vision"><a href="javascript:void(0)"><i class="fas fa-eye"></i> Vision, Mission & Values</a></li>
+            <li class="nav-item" data-section="branches"><a href="javascript:void(0)"><i class="fas fa-map-marker-alt"></i> Branches & Offices</a></li>
+            <li class="nav-item" data-section="scope"><a href="javascript:void(0)"><i class="fas fa-search"></i> Scope of Business</a></li>
+            <li class="nav-item" data-section="products"><a href="javascript:void(0)"><i class="fas fa-box"></i> Products & Services</a></li>
+            <li class="nav-item" data-section="highlights"><a href="javascript:void(0)"><i class="fas fa-chart-line"></i> Operational Highlights</a></li>
+            <li class="nav-item" data-section="awards"><a href="javascript:void(0)"><i class="fas fa-trophy"></i> Awards & Recognitions</a></li>
+            <li class="nav-item" data-section="structure"><a href="javascript:void(0)"><i class="fas fa-sitemap"></i> Organizational Structure</a></li>
+            <li class="nav-item" data-section="directors"><a href="javascript:void(0)"><i class="fas fa-user-tie"></i> Board of Directors</a></li>
+            <li class="nav-item" data-section="management"><a href="javascript:void(0)"><i class="fas fa-users"></i> Management Committee</a></li>
+            <li class="nav-item" data-section="capital"><a href="javascript:void(0)"><i class="fas fa-coins"></i> Capital Structure</a></li>
+            <li class="nav-item" data-section="governance"><a href="javascript:void(0)"><i class="fas fa-balance-scale"></i> Corporate Governance</a></li>
+            <li class="nav-item" data-section="csr"><a href="javascript:void(0)"><i class="fas fa-hands-helping"></i> CSR</a></li>
+            <li class="nav-item" data-section="financial"><a href="javascript:void(0)"><i class="fas fa-file-invoice-dollar"></i> Financial Statements</a></li>
+            <li class="nav-item" data-section="team"><a href="javascript:void(0)"><i class="fas fa-user-friends"></i> Our Team</a></li>
+            <li class="nav-item" data-section="references"><a href="javascript:void(0)"><i class="fas fa-book"></i> References</a></li>
+            <li class="nav-item" data-section="disclaimer"><a href="javascript:void(0)"><i class="fas fa-exclamation-triangle"></i> Disclaimer</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+
+
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <h1 data-aos="fade-down">East West Banking Corporation</h1>
+
+            <div class="company-intro">
+                <div class="logo-container-main" data-aos="fade-right" data-aos-delay="100">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Tp3X3YMD9E6KfJn2T8kxhnYxweChUw5IuA&s" alt="EastWest Bank Logo" style="max-width: 250px;">
+                </div>
+
+                <div class="company-description" data-aos="fade-left" data-aos-delay="200">
+                    <p class="tagline"><em>"Your Dream. Our Focus."</em></p>
+
+                    <p>Commonly known as EastWest Bank, we are a publicly listed universal bank in the Philippines and a member of the Filinvest Group. Our logo features two interlocking chevrons—symbolizing "East" and "West"—forming a diamond at the center, representing synergy and the value created for clients through our products and services.</p>
+
+                    <p>Established on July 6, 1994, EastWest Bank blends the traditional values of the East with the efficiency of the West to deliver exceptional financial services to our customers.</p>
+                </div>
+            </div>
+
+            <div class="page-navigation">
+                <button class="nav-button prev-page" disabled>
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-button next-page" data-next="background">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Company Name Section -->
+        <div id="company-name" class="section" style="display: none;">
+            <h1>Company Name</h1>
+            <p><strong>East West Banking Corporation</strong></p>
+            <p>Commonly known as EastWest Bank, it is a publicly listed universal bank in the Philippines and a member of the Filinvest Group.</p>
+            <p><em>Sources: Wikipedia, Philippines Business Database</em></p>
+        </div>
+
+        <!-- Logo Section -->
+        <div id="logo" class="section" style="display: none;">
+            <h1>Logo</h1>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Tp3X3YMD9E6KfJn2T8kxhnYxweChUw5IuA&s" alt="EastWest Bank Logo" style="max-width: 200px;">
+            </div>
+            <p>The EastWest Bank logo features two interlocking chevrons—symbolizing "East" and "West"—forming a diamond at the center. This design represents synergy and the value created for clients through the bank's products and services. The logo's colors—green, purple, and magenta—reflect growth, creativity, and innovation.</p>
+            <p><em>Source: EastWest Bank</em></p>
+        </div>
+
+        <!-- Tagline Section -->
+        <div id="tagline" class="section" style="display: none;">
+            <h1>Tagline</h1>
+            <p>While EastWest Bank does not have a widely publicized tagline, its mission emphasizes:</p>
+            <blockquote style="font-style: italic; border-left: 4px solid #1565c0; padding-left: 15px; margin: 20px 0;">
+                "Providing excellent service in the delivery of integrated and innovative products, responsive to current and future financial needs, at the best value."
+            </blockquote>
+            <p><em>Sources: Philippines Business Database, EastWest Bank, Wikipedia</em></p>
+        </div>
+
+        <!-- Background Section -->
+        <div id="background" class="section">
+            <h1>Background & History</h1>
+            <h2>History</h2>
+            <p>EastWest Bank was established on July 6, 1994, following the liberalization of the Philippine banking industry. It commenced operations on August 1, 1994, with its first branch located along Sen. Gil Puyat Avenue in Makati City. The bank's name reflects its aim to blend the traditional values of the East with the efficiency of the West.</p>
+
+            <p>Over the years, EastWest Bank has expanded its services through strategic acquisitions, including Ecology Savings Bank in 2002, AIG Philam Savings Bank in 2009, and the retail banking business of Standard Chartered Bank Philippines in 2016. In 2020, it launched "Komo," a fully digital banking service under its subsidiary, EastWest Rural Bank, Inc.</p>
+
+            <h2>Head Office Address</h2>
+            <address style="font-style: normal; margin: 15px 0;">
+                The Beaufort, 5th Avenue corner 23rd Street,<br>
+                Bonifacio Global City, Taguig City, 1634,<br>
+                Metro Manila, Philippines
+            </address>
+
+            <p><em>Sources: Philippines Business Database, Wikipedia</em></p>
+
+            <div class="page-navigation">
+                <button class="nav-button prev-page" data-prev="home">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-button next-page" data-next="profile">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Corporate Profile Section -->
+        <div id="profile" class="section">
+            <h1>Corporate Profile</h1>
+            <h2>🏢 EastWest Bank at a Glance</h2>
+            <p>East West Banking Corporation, known as EastWest Bank, is one of the fastest-growing banks in the Philippines. It was incorporated on July 6, 1994 and started operations on August 1, 1994. It is a subsidiary of Filinvest Development Corporation, a large Philippine conglomerate with interests in real estate, hospitality, power generation, and sugar.</p>
+
+            <p>EastWest Bank is publicly listed on the Philippine Stock Exchange under the ticker symbol EW and operates as a universal bank, offering a full range of financial products and services to consumers, businesses, and corporations.</p>
+
+            <h2>Subsidiaries and Affiliates</h2>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 15px;"><strong>EastWest Rural Bank, Inc.</strong><br>
+                – A wholly owned rural banking arm that enables financial inclusion in rural areas and supports EastWest's digital bank product, Komo.</li>
+
+                <li style="margin-bottom: 15px;"><strong>EastWest Ageas Life Insurance Corporation</strong><br>
+                – A joint venture with Ageas Insurance International N.V., providing life insurance and investment-linked products.</li>
+
+                <li style="margin-bottom: 15px;"><strong>EastWest Insurance Brokerage, Inc.</strong><br>
+                – Offers non-life insurance products such as auto, fire, accident, and marine insurance.</li>
+
+                <li style="margin-bottom: 15px;"><strong>EastWest Leasing and Finance Corporation</strong><br>
+                – Provides financing and leasing services for equipment, vehicles, and other assets.</li>
+
+                <li style="margin-bottom: 15px;"><strong>Assurance Solutions Insurance Agency, Inc.</strong><br>
+                – Acts as an insurance agency partner to support distribution of various insurance products.</li>
+
+                <li style="margin-bottom: 15px;"><strong>Quest Marketing and Integrated Services, Inc.</strong><br>
+                – Handles sales and marketing activities for various EastWest products and services.</li>
+            </ul>
+
+            <div class="page-navigation">
+                <button class="nav-button prev-page" data-prev="background">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-button next-page" data-next="vision">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Vision, Mission & Values Section -->
+        <div id="vision" class="section">
+            <h1>Vision, Mission, Goals and Core Values</h1>
+
+            <h2>📌 Vision</h2>
+            <blockquote style="font-style: italic; border-left: 4px solid #1565c0; padding-left: 15px; margin: 20px 0;">
+                "To be a world-class bank anchored on service excellence in our chosen markets."
+            </blockquote>
+            <p><em>Sources: Editable Business Templates, East West Banker, Comparably</em></p>
+
+            <h2>🎯 Mission</h2>
+            <p>EastWest Bank is committed to creating value across multiple dimensions:</p>
+
+            <div style="margin-left: 20px; margin-bottom: 20px;">
+                <h3>For Our Chosen Markets:</h3>
+                <p>By delivering excellent service through integrated and innovative products that are responsive to current and future financial needs, all at the best value.</p>
+                <p><em>Sources: eastwestruralbank.com.ph, East West Banker, East West Bank</em></p>
+
+                <h3>For Our Employees:</h3>
+                <p>By providing opportunities to develop their full potential and offering recognition and rewards commensurate with their contributions.</p>
+                <p><em>Sources: Comparably, East West Banker, Editable Business Templates</em></p>
+
+                <h3>For Our Community:</h3>
+                <p>By actively participating in community development and support initiatives.</p>
+                <p><em>Sources: Studocu, Editable Business Templates, East West Bank</em></p>
+            </div>
+
+            <h2>🎯 Goals & Objectives</h2>
+            <p>EastWest Bank's strategic priorities include:</p>
+
+            <div style="margin-left: 20px; margin-bottom: 20px;">
+                <h3>Expanding Global Network:</h3>
+                <p>To meet customers' diverse financial needs by focusing on new business opportunities in the United States and Asia.</p>
+                <p><em>Source: East West Bank</em></p>
+
+                <h3>Strengthening Consumer Banking:</h3>
+                <p>To uplift the growing number of communities served by providing financial solutions and products that positively impact their financial goals.</p>
+                <p><em>Source: East West Bank</em></p>
+
+                <h3>Developing Talent Base:</h3>
+                <p>To prepare for the next phase of growth by strengthening the recruiting process and growing internal talent.</p>
+                <p><em>Sources: East West Bank, East West Banker</em></p>
+            </div>
+
+            <h2>💡 Core Values</h2>
+            <p>EastWest Bank's core values guide its operations and interactions:</p>
+
+            <ul style="list-style-type: none; padding-left: 20px;">
+                <li style="margin-bottom: 15px;">
+                    <strong>Integrity:</strong> Upholding the highest ethical standards in all actions.
+                    <p><em>Sources: East West Bank, Editable Business Templates, Responsibility Reports</em></p>
+                </li>
+
+                <li style="margin-bottom: 15px;">
+                    <strong>Excellence:</strong> Pursuing continuous improvement and innovation in products and services.
+                    <p><em>Source: Editable Business Templates</em></p>
+                </li>
+
+                <li style="margin-bottom: 15px;">
+                    <strong>Mutual Concern:</strong> Fostering a caring environment for customers and employees alike.
+                </li>
+
+                <li style="margin-bottom: 15px;">
+                    <strong>Teamwork and Individual Initiative:</strong> Encouraging collaboration while recognizing individual contributions.
+                </li>
+
+                <li style="margin-bottom: 15px;">
+                    <strong>Corporate Pride:</strong> Taking pride in the organization's achievements and reputation.
+                </li>
+
+                <li style="margin-bottom: 15px;">
+                    <strong>Sense of Urgency:</strong> Acting promptly to meet customer needs and market demands.
+                </li>
+
+                <li style="margin-bottom: 15px;">
+                    <strong>Leadership:</strong> Demonstrating guidance and direction in all endeavors.
+                </li>
+            </ul>
+
+            <p>These principles underpin EastWest Bank's commitment to delivering exceptional financial services and fostering strong relationships with customers, employees, and the community.</p>
+
+            <div class="page-navigation">
+                <button class="nav-button prev-page" data-prev="profile">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-button next-page" data-next="branches">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Branches Section -->
+        <div id="branches" class="section">
+            <h1>Branches & Offices</h1>
+
+            <h2>📍 Philippine Branch Network</h2>
+            <p>As of 2022, EastWest Bank operates approximately 490 branches across the Philippines, including its subsidiaries. These branches are strategically located in major cities and municipalities nationwide, ensuring accessibility for customers.</p>
+
+            <p>To find a specific branch or ATM near you, you can use the EastWest Bank Store and ATM Locator.</p>
+            <p><em>Source: EastWest Bank</em></p>
+
+            <h2>🏢 Head Office</h2>
+            <address style="font-style: normal; margin: 15px 0;">
+                The Beaufort, 5th Avenue corner 23rd Street,<br>
+                Bonifacio Global City, Taguig City,<br>
+                Metro Manila, Philippines
+            </address>
+
+            <h2>🏦 EastWest Rural Bank Branches</h2>
+            <p>EastWest Rural Bank, a subsidiary of EastWest Bank, extends banking services to rural areas. You can locate their branches using the <a href="https://eastwestruralbank.com.ph/store-locator" target="_blank" rel="noopener noreferrer">EastWest Rural Bank Store Locator</a>.</p>
+
+            <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 8px;">
+                <h3>Contact Information</h3>
+                <p><strong>24-Hour Hotline:</strong> (+632) 8888-1755</p>
+                <p><strong>Email:</strong> service@eastwestbanker.com</p>
+                <p><em>Source: <a href="https://eastwestruralbank.com.ph/store-locator" target="_blank" rel="noopener noreferrer">EastWest Rural Bank</a></em></p>
+            </div>
+
+            <div class="page-navigation">
+                <button class="nav-button prev-page" data-prev="vision">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-button next-page" data-next="scope">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Scope of Business Section -->
+        <div id="scope" class="section">
+            <h1>Scope of Business/Operation</h1>
+
+            <p>EastWest Bank operates as a universal bank in the Philippines, meaning it is authorized to offer a complete range of commercial, investment, and consumer banking services. Its operations span across various financial sectors, serving individuals, corporations, and small businesses nationwide.</p>
+
+            <h2>🏦 1. Retail Banking</h2>
+            <ul>
+                <li><strong>Deposits:</strong> Savings, checking, and time deposit accounts</li>
+                <li><strong>Consumer Loans:</strong> Auto loans, personal loans, salary loans, and housing loans</li>
+                <li><strong>Credit Cards:</strong> EastWest credit card offerings for retail clients</li>
+                <li><strong>Digital Banking:</strong> Mobile and internet banking platforms for easy fund transfers, bills payment, and account management</li>
+                <li><strong>Insurance and Bancassurance:</strong> Life and non-life insurance products via EastWest Ageas and partner providers</li>
+            </ul>
+
+            <h2>🏢 2. Corporate and Commercial Banking</h2>
+            <ul>
+                <li><strong>Trade Finance:</strong> Export/import financing, letters of credit</li>
+                <li><strong>Corporate Loans:</strong> Short-term and long-term lending solutions</li>
+                <li><strong>Cash Management Solutions:</strong> Services for managing receivables, payables, and liquidity</li>
+                <li><strong>Trust and Treasury:</strong> Investment management, securities dealing, and trust products</li>
+            </ul>
+
+            <h2>📈 3. Treasury and Capital Markets</h2>
+            <ul>
+                <li>Foreign exchange and derivatives trading</li>
+                <li>Fixed income securities</li>
+                <li>Government securities and treasury bill investments</li>
+            </ul>
+
+            <h2>🧾 4. Subsidiary Services</h2>
+            <p>Through its subsidiaries, EastWest Bank also extends its operations to:</p>
+            <ul>
+                <li>Rural banking (EastWest Rural Bank)</li>
+                <li>Leasing and financing (EastWest Leasing and Finance)</li>
+                <li>Insurance brokerage (EastWest Insurance Brokerage, Assurance Solutions)</li>
+                <li>Life insurance (EastWest Ageas Life)</li>
+                <li>Marketing services (Quest Marketing)</li>
+            </ul>
+
+            <h2>🌱 5. Digital Banking Initiatives</h2>
+            <p><strong>Komo by EastWest:</strong> A fully digital bank powered by EastWest Rural Bank, offering no-branch, online-only savings accounts and debit card services.</p>
+
+            <h2>🌍 Geographical Scope</h2>
+            <ul>
+                <li>Nationwide presence in the Philippines with over 490 branches and 580+ ATMs</li>
+                <li>Select international partnerships for remittance, correspondent banking, and global trade services</li>
+            </ul>
+
+            <p class="conclusion" style="margin-top: 20px; font-style: italic;">EastWest Bank continues to expand its service scope by leveraging digital innovations, rural banking, and tailored financial solutions, staying aligned with the evolving needs of both urban and rural customers.</p>
+
+            <div class="page-navigation">
+                <button class="nav-button prev-page" data-prev="branches">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="nav-button next-page" data-next="products">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Products & Services Section -->
+        <div id="products" class="section">
+            <h1>Products & Services</h1>
+
+            <h2>🏦 Retail Banking Products and Services</h2>
+
+            <h3>💳 Deposit Products</h3>
+            <ul>
+                <li>Regular Savings Accounts</li>
+                <li>Peso & Dollar Time Deposits</li>
+                <li>High Yield Savings Accounts</li>
+                <li>Kids Savings Accounts (Junior Savers)</li>
+                <li>US Dollar Accounts (USD Savings & Checking)</li>
+            </ul>
+
+            <h3>💰 Loan Products</h3>
+            <ul>
+                <li><strong>Auto Loans</strong> – For brand-new and pre-owned vehicles</li>
+                <li><strong>Personal Loans</strong> – Unsecured loans for various personal needs</li>
+                <li><strong>Home Loans</strong> – For property purchase, refinancing, or construction</li>
+                <li><strong>Salary Loans</strong> – Offered via employer tie-ups</li>
+            </ul>
+
+            <h3>💳 Credit Cards</h3>
+            <ul>
+                <li>EastWest Visa and Mastercard Credit Cards</li>
+                <li>Co-branded Cards (e.g., EastWest Dolce Vita, EastWest Platinum)</li>
+                <li>Credit Card Installment Plans</li>
+                <li>Balance Transfer and Easy Pay Programs</li>
+            </ul>
+
+            <h3>📲 Digital & Online Banking</h3>
+            <ul>
+                <li>EastWest Online (Internet banking)</li>
+                <li>EastWest Mobile App</li>
+                <li>EastWest ATMs & Cash Deposit Machines</li>
+                <li>Bills payment, fund transfers, mobile top-up, QR code payments</li>
+            </ul>
+
+            <h2>🏢 Corporate & Commercial Banking</h2>
+
+            <h3>🏛 Corporate Loans</h3>
+            <ul>
+                <li>Working Capital Loans</li>
+                <li>Term Loans</li>
+                <li>Trade Finance Facilities (e.g., Letter of Credit, Trust Receipts)</li>
+            </ul>
+
+            <h3>🧾 Cash Management Services</h3>
+            <ul>
+                <li>Payroll Solutions</li>
+                <li>Collection and Disbursement Services</li>
+                <li>Auto Credit and Debit Arrangements</li>
+            </ul>
+
+            <h3>📦 Trade Services</h3>
+            <ul>
+                <li>Import and Export Financing</li>
+                <li>Standby Letters of Credit</li>
+                <li>Foreign Exchange and Hedging</li>
+            </ul>
+
+            <h3>💼 Investment & Trust Services</h3>
+            <ul>
+                <li>Investment Management Accounts (IMAs)</li>
+                <li>Unit Investment Trust Funds (UITFs)</li>
+                <li>Escrow and Agency Services</li>
+                <li>Retirement Fund Management</li>
+            </ul>
+
+            <h2>🛡️ Insurance and Bancassurance</h2>
+            <ul>
+                <li>Life Insurance (via EastWest Ageas Life Insurance)</li>
+                <li>Non-Life Insurance (auto, fire, personal accident, marine, etc. via EastWest Insurance Brokerage)</li>
+                <li>Credit Life Insurance</li>
+            </ul>
+
+            <h2>🌿 Digital-Only Products</h2>
+            <ul>
+                <li>Komo by EastWest (Digital savings account with no branch visits needed)</li>
+                <li>Mobile-first financial products for younger or tech-savvy customers</li>
+            </ul>
+
+            <h2>🏡 Specialized Services</h2>
+            <ul>
+                <li>Foreign Exchange Services</li>
+                <li>Safe Deposit Boxes</li>
+                <li>Remittance Services (through partners like Western Union)</li>
+                <li>POS and E-Commerce Merchant Services</li>
+                <li>Government Payment Collections (SSS, Pag-IBIG, etc.)</li>
+            </ul>
+        </div>
+
+        <!-- Operational/Financial Highlights Section -->
+        <div id="highlights" class="section">
+            <h1>Operational/Financial Highlights</h1>
+
+            <h2>💼 Financial Highlights</h2>
+            <ul>
+                <li><strong>Net Income:</strong> $1.2 billion, or $8.33 per diluted share, marking a 3% increase year-over-year.
+                    <p><em>Sources: East West Bank, Press Release Services</em></p>
+                </li>
+
+                <li><strong>Revenue:</strong> Achieved a record $2.6 billion, an 11% rise compared to the previous year.
+                    <p><em>Source: East West Bank</em></p>
+                </li>
+
+                <li><strong>Adjusted Pre-Tax, Pre-Provision Income:</strong> Reached a record $1.8 billion, up 12% year-over-year.
+                    <p><em>Source: East West Bank</em></p>
+                </li>
+
+                <li><strong>Return on Average Assets:</strong> 1.60%.</li>
+
+                <li><strong>Return on Average Common Equity:</strong> 15.9%.
+                    <p><em>Sources: Yahoo Finance, Q4 Financials, East West Bank</em></p>
+                </li>
+
+                <li><strong>Book Value Per Share:</strong> Increased by 12% year-over-year.
+                    <p><em>Sources: Press Release Services, East West Bank</em></p>
+                </li>
+            </ul>
+
+            <h2>🏦 Operational Highlights</h2>
+            <ul>
+                <li><strong>Total Assets:</strong> $76.0 billion as of December 31, 2024, reflecting a 9% increase from the previous year.
+                    <p><em>Source: Q4 Financials</em></p>
+                </li>
+
+                <li><strong>Total Loans:</strong> $53.7 billion, up 3% year-over-year.
+                    <p><em>Source: Q4 Financials</em></p>
+                </li>
+
+                <li><strong>Total Deposits:</strong> $63.2 billion, a 13% increase from the previous year.
+                    <p><em>Source: Q4 Financials</em></p>
+                </li>
+
+                <li><strong>Stockholders' Equity:</strong> $7.7 billion, with a total stockholders' equity to assets ratio of 10.17%.</li>
+            </ul>
+
+            <div style="margin-top: 25px; padding: 15px; background-color: #f0f7ff; border-left: 4px solid #1565c0; border-radius: 4px;">
+                <p style="font-style: italic; margin: 0;">These financial and operational highlights demonstrate EastWest Bank's strong performance and continued growth trajectory in the banking sector.</p>
+            </div>
+        </div>
+
+        <!-- Awards Section -->
+        <div id="awards" class="section">
+            <h1>Awards & Recognitions</h1>
+            <h2>Last 5 Years (2020-2024)</h2>
+
+            <div class="award-year" style="margin-bottom: 30px;">
+                <h3 style="background-color: #0a4275; color: white; padding: 10px; border-radius: 5px;">2024 Highlights</h3>
+                <h4>International Finance Awards:</h4>
+                <ul>
+                    <li>Most Innovative Forex Broker (2nd consecutive year)</li>
+                    <li>Best Priority Banking Experience (2nd consecutive year)</li>
+                    <li>Best Emerging New Equity Fund Manager</li>
+                    <li>Best Consumer Loan Experience Bank for Personal Loans</li>
+                </ul>
+
+                <h4>Digital Banker's Digital CX Awards:</h4>
+                <ul>
+                    <li>Best Digital Bank for Komo by EastWest</li>
+                    <li>Best Digital Insurance Experience for EastWest Ageas Life</li>
+                </ul>
+
+                <h4>Asian Banking and Finance Awards:</h4>
+                <ul>
+                    <li>Mobile Banking and Payment Initiative of the Year for EastWest System Tech Assistant (ESTA)</li>
+                </ul>
+
+                <h4>PDI-Statista Best Employers Awards:</h4>
+                <ul>
+                    <li>Recognized as one of the Philippines' Best Employers</li>
+                </ul>
+            </div>
+
+            <div class="award-year" style="margin-bottom: 30px;">
+                <h3 style="background-color: #0a4275; color: white; padding: 10px; border-radius: 5px;">2023 Highlights</h3>
+                <h4>International Finance Magazine Awards:</h4>
+                <ul>
+                    <li>Most Innovative Smart Banking Services – Digital Bank for Komo by EastWest</li>
+                    <li>Best Priority Banking Experience for EastWest Priority</li>
+                </ul>
+
+                <h4>Global Finance Magazine:</h4>
+                <ul>
+                    <li>Best Private Bank for 2024</li>
+                </ul>
+
+                <h4>Golden Arrow Awards:</h4>
+                <ul>
+                    <li>Golden Arrow for Good Corporate Governance</li>
+                </ul>
+            </div>
+
+            <div class="award-year" style="margin-bottom: 30px;">
+                <h3 style="background-color: #0a4275; color: white; padding: 10px; border-radius: 5px;">2022 Highlights</h3>
+                <h4>Digital Banker's Digital CX Awards:</h4>
+                <ul>
+                    <li>Best Digital Bank for Komo by EastWest</li>
+                    <li>Best Digital Insurance Experience for EastWest Ageas Life</li>
+                </ul>
+            </div>
+
+            <div class="award-year" style="margin-bottom: 30px;">
+                <h3 style="background-color: #0a4275; color: white; padding: 10px; border-radius: 5px;">2021 Highlights</h3>
+                <h4>Bank Director's RankingBanking Study:</h4>
+                <ul>
+                    <li>#1 Performing Bank in the $50 billion and above asset category</li>
+                </ul>
+            </div>
+
+            <div class="award-year" style="margin-bottom: 30px;">
+                <h3 style="background-color: #0a4275; color: white; padding: 10px; border-radius: 5px;">2020 Highlights</h3>
+                <h4>Asian Banking and Finance Awards:</h4>
+                <ul>
+                    <li>Mobile Banking and Payment Initiative of the Year for EastWest System Tech Assistant (ESTA)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Organizational Structure Section -->
+        <div id="structure" class="section">
+            <h1>Organizational Structure</h1>
+
+            <p>The organizational structure of EastWest Bank is designed to support its diverse range of banking products and services, from retail banking to corporate and investment banking. It features a hierarchical structure that includes senior management, various divisions, and departments to oversee operations, risk management, and customer services.</p>
+
+            <div class="org-structure">
+                <h2>1. Board of Directors</h2>
+                <p>The Board of Directors provides oversight, strategic direction, and corporate governance for the bank. Key members include the Chairperson, Vice Chairperson, and independent and non-independent directors.</p>
+
+                <h2>2. Executive Management</h2>
+                <ul>
+                    <li><strong>President and CEO:</strong> Responsible for overall strategy, operations, and performance of the bank.</li>
+                    <li><strong>Chief Operating Officer (COO):</strong> Handles day-to-day operations and ensures the smooth running of all banking functions.</li>
+                    <li><strong>Chief Financial Officer (CFO):</strong> Oversees financial planning, management, and risk assessments.</li>
+                    <li><strong>Chief Risk Officer (CRO):</strong> Ensures risk management strategies are effectively implemented.</li>
+                    <li><strong>Chief Compliance Officer (CCO):</strong> Focuses on regulatory compliance and internal controls.</li>
+                </ul>
+
+                <h2>3. Business Units / Divisions</h2>
+                <p>EastWest Bank is divided into several key divisions that focus on different aspects of banking:</p>
+
+                <div style="margin-left: 20px;">
+                    <h3>Retail Banking Division</h3>
+                    <ul>
+                        <li><strong>Personal Banking:</strong> Manages individual customers, offering savings accounts, loans, and credit cards.</li>
+                        <li><strong>Digital Banking:</strong> Focuses on mobile and online banking services, including the Komo digital bank.</li>
+                        <li><strong>Customer Service and Relationship Management:</strong> Handles inquiries, complaints, and relationship management for retail clients.</li>
+                    </ul>
+
+                    <h3>Corporate Banking Division</h3>
+                    <ul>
+                        <li><strong>Corporate Loans:</strong> Provides financing for businesses, including working capital and term loans.</li>
+                        <li><strong>Trade Finance:</strong> Manages international trade, letters of credit, and other trade services.</li>
+                        <li><strong>Treasury:</strong> Focuses on managing liquidity, foreign exchange, and investment activities for corporate clients.</li>
+                    </ul>
+
+                    <h3>Commercial Banking Division</h3>
+                    <ul>
+                        <li><strong>Small and Medium Enterprise (SME) Banking:</strong> Supports small to medium-sized businesses with loans and banking services tailored to their needs.</li>
+                        <li><strong>Business Banking:</strong> Provides a range of financial products for growing businesses.</li>
+                    </ul>
+
+                    <h3>Investment and Wealth Management Division</h3>
+                    <ul>
+                        <li><strong>Trust Services:</strong> Manages investment accounts, unit investment trust funds (UITFs), and retirement funds.</li>
+                        <li><strong>Private Banking:</strong> Provides personalized financial planning and wealth management for high-net-worth clients.</li>
+                    </ul>
+
+                    <h3>Risk and Compliance Division</h3>
+                    <ul>
+                        <li><strong>Risk Management:</strong> Identifies and manages various risks (credit, market, operational, etc.).</li>
+                        <li><strong>Compliance:</strong> Ensures the bank follows regulatory requirements and internal controls.</li>
+                    </ul>
+                </div>
+
+                <h2>4. Support Functions and Departments</h2>
+                <ul>
+                    <li><strong>Finance Department:</strong> Handles accounting, financial reporting, and budget management.</li>
+                    <li><strong>Human Resources:</strong> Manages recruitment, employee relations, compensation, and training.</li>
+                    <li><strong>Marketing and Communications:</strong> Responsible for branding, advertising, public relations, and customer engagement.</li>
+                    <li><strong>Legal Department:</strong> Provides legal advice, manages contracts, and ensures legal compliance.</li>
+                    <li><strong>Operations and IT:</strong> Manages bank operations and ensures technology infrastructure supports the bank's needs.</li>
+                    <li><strong>Audit:</strong> Conducts internal audits to ensure compliance with policies and procedures.</li>
+                </ul>
+
+                <h2>5. Subsidiaries and Affiliates</h2>
+                <p>EastWest Bank has various subsidiaries that extend its services:</p>
+                <ul>
+                    <li><strong>EastWest Rural Bank:</strong> Focuses on serving rural areas with financial services tailored to the local economy.</li>
+                    <li><strong>EastWest Leasing & Finance Corporation:</strong> Provides leasing and financing products.</li>
+                    <li><strong>EastWest Ageas Life Insurance Company:</strong> Joint venture with Ageas Insurance offering life insurance products.</li>
+                    <li><strong>Komo by EastWest:</strong> Digital banking platform offered by EastWest Rural Bank.</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <img src="https://via.placeholder.com/800x400?text=EastWest+Bank+Organizational+Chart" alt="EastWest Bank Organizational Chart" style="max-width: 100%; border: 1px solid #ddd; border-radius: 5px;">
+                <p style="font-style: italic; margin-top: 10px;">Organizational structure visualization</p>
+            </div>
+        </div>
+
+        <!-- Board of Directors Section -->
+        <div id="directors" class="section">
+            <h1>Board of Directors</h1>
+            <p>As of April 2024, the Board of Directors of EastWest Bank comprises a distinguished group of individuals with diverse expertise in banking, governance, and business leadership.</p>
+
+            <div class="profiles-container">
+                <div class="profile-card">
+                    <img src="https://cms.eastwestbanker.com/sites/default/files/boardofdirectors/profilepicture/JTGotianun.jpg" alt="Jonathan T. Gotianun">
+                    <h3>Jonathan T. Gotianun</h3>
+                    <p><strong>Chairman</strong></p>
+                    <p>Chairman of EastWest Bank and the Filinvest Development Corporation. A seasoned leader with extensive experience in the banking and real estate sectors.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/JSFernandez.jpg" alt="Jacqueline S. Fernandez">
+                    <h3>Jacqueline S. Fernandez</h3>
+                    <p><strong>President & Director</strong></p>
+                    <p>President of EastWest Bank. Brings a wealth of experience in banking operations and leadership.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.filinvestgroup.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2024/01/JGY-1.jpg.webp" alt="Lourdes Josephine G. Yap">
+                    <h3>Lourdes Josephine G. Yap</h3>
+                    <p><strong>Director</strong></p>
+                    <p>Director of EastWest Bank. Involved in various strategic initiatives within the bank.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkwbEF_DZAxyKxXIYTDA3Dp1MO6QXRHfCZFw&s" alt="Isabelle Therese G. Yap">
+                    <h3>Isabelle Therese G. Yap</h3>
+                    <p><strong>Director</strong></p>
+                    <p>Director of EastWest Bank. Contributes to the bank's governance and strategic planning.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7NaybhUBRTO_VGFvmysPlOCl-g1NsuornZw&s" alt="Joseph Del Mar Yap">
+                    <h3>Joseph Del Mar Yap</h3>
+                    <p><strong>Director</strong></p>
+                    <p>Director of EastWest Bank. Provides insights into the bank's operational and strategic decisions.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.filinvestreit.com/sites/default/files/styles/large/public/2024-04/rhodaahuang-flrt-director_0.png?itok=QKu7EDFL" alt="Rhoda A. Huang">
+                    <h3>Rhoda A. Huang</h3>
+                    <p><strong>Director</strong></p>
+                    <p>Director of EastWest Bank. Participates in the bank's governance and policy-making processes.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtIEx0ZyhuojZpWFZzLnVkG7iUHFkpqXSyKA&s" alt="Imelda B. Capistrano">
+                    <h3>Imelda B. Capistrano</h3>
+                    <p><strong>Independent Director</strong></p>
+                    <p>Independent Director of EastWest Bank. Offers independent oversight and strategic advice.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://cms.eastwestbanker.com/sites/default/files/boardofdirectors/profilepicture/GKilayko.jpg" alt="Gregorio U. Kilayko">
+                    <h3>Gregorio U. Kilayko</h3>
+                    <p><strong>Independent Director</strong></p>
+                    <p>Independent Director of EastWest Bank. Serves as the Lead Independent Director, ensuring effective governance.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/JNgo.jpg" alt="Jerry G. Ngo">
+                    <h3>Jerry G. Ngo</h3>
+                    <p><strong>Independent Director</strong></p>
+                    <p>Independent Director of EastWest Bank. Brings a wealth of experience in banking and finance.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNm2Qlw0IaHJ5vxkTU7qztFpmCvkRbnXPuuw&s" alt="Antonio C. Moncupa, Jr.">
+                    <h3>Antonio C. Moncupa, Jr.</h3>
+                    <p><strong>Independent Director</strong></p>
+                    <p>Independent Director of EastWest Bank. Provides strategic insights and governance expertise.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.philequity.net/images/WilsonSy228.jpg" alt="Wilson L. Sy">
+                    <h3>Wilson L. Sy</h3>
+                    <p><strong>Independent Director</strong></p>
+                    <p>Independent Director of EastWest Bank. Contributed significantly to the bank's strategic direction.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65936f6381c3aa52333e232c/9d8e50e9-b092-4674-93fe-f1b06e8ec205/JV-Valerio-Lawyer-Alabang" alt="Atty. Benedicto M. Valerio, Jr.">
+                    <h3>Atty. Benedicto M. Valerio, Jr.</h3>
+                    <p><strong>Corporate Secretary</strong></p>
+                    <p>Corporate Secretary of EastWest Bank. Ensures compliance with corporate governance standards.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p>For detailed profiles and more information, you can visit the <a href="https://www.eastwestbanker.com/about/whoweare/boardofdirectors" target="_blank" rel="noopener noreferrer">EastWest Bank Board of Directors page</a>.</p>
+            </div>
+        </div>
+
+        <!-- Management Committee Section -->
+        <div id="management" class="section">
+            <h1>Management Committee</h1>
+
+            <div class="profiles-container">
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/JSFernandez.jpg" alt="Jacqueline S. Fernandez">
+                    <h3>Jacqueline S. Fernandez</h3>
+                    <p><strong>President & Director</strong></p>
+                    <p>Oversees the bank's overall operations and strategic direction. Previously served as Senior Executive Vice President and Chief Lending Officer. Held leadership roles in consumer lending and credit cards. Academic background includes AB Economics and an MBA from the University of the Philippines.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/JNgo.jpg" alt="Jerry G. Ngo">
+                    <h3>Jerry G. Ngo</h3>
+                    <p><strong>Chief Executive Officer</strong></p>
+                    <p>Leads the bank's executive management team. Brings extensive experience in banking and financial services.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65936f6381c3aa52333e232c/9d8e50e9-b092-4674-93fe-f1b06e8ec205/JV-Valerio-Lawyer-Alabang" alt="Benedicto M. Valerio, Jr.">
+                    <h3>Benedicto M. Valerio, Jr.</h3>
+                    <p><strong>Corporate Secretary</strong></p>
+                    <p>Ensures compliance with corporate governance standards. Manages board meetings and shareholder communications.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStzc0VPjauqnbIAc50lUh8DiGaypXyMZYAmQ&s" alt="Rafael S. Algarra, Jr.">
+                    <h3>Rafael S. Algarra, Jr.</h3>
+                    <p><strong>Senior Executive Vice President & Head – Financial Markets and Wealth Management</strong></p>
+                    <p>Leads the bank's treasury, investment, and wealth management services. Responsible for managing financial markets and client portfolios.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://media.licdn.com/dms/image/v2/C5103AQGPU8s7ry7qzg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1517615023745?e=2147483647&v=beta&t=IGvJv5KuI2gmKSKdKa4j_lW6yehaG5i8B58v0675SDg" alt="Gerardo N. Susmerano">
+                    <h3>Gerardo N. Susmerano</h3>
+                    <p><strong>Senior Executive Vice President & Head – Retail Banking</strong></p>
+                    <p>Oversees the bank's retail banking operations, including branch services and customer relations. Focuses on enhancing customer experience and expanding retail offerings.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://media.licdn.com/dms/image/v2/C4D03AQFuUOFOBJ29dQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1654581121012?e=2147483647&v=beta&t=gya5nn911HKYKZ0ZgprngKXPAfUcDVK3gMN6jucBEJc" alt="Lawrence L. Lee">
+                    <h3>Lawrence L. Lee</h3>
+                    <p><strong>Executive Vice President & Head – Consumer Lending</strong></p>
+                    <p>Manages the bank's consumer lending portfolio, including personal loans and credit products. Develops strategies to meet consumer financing needs.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/ZOng.jpg" alt="Zenaida A. Ong">
+                    <h3>Zenaida A. Ong</h3>
+                    <p><strong>Executive Vice President & Head – Corporate Banking</strong></p>
+                    <p>Leads corporate banking services, offering tailored solutions to businesses. Focuses on building and maintaining corporate client relationships.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP2pljjbdf8xBW478yHyhxwNjdr_OP75wGTQ&s" alt="Cecilio Frederick M. Pusag">
+                    <h3>Cecilio Frederick M. Pusag</h3>
+                    <p><strong>Executive Vice President & Chief Information Officer & Head – Information Technology</strong></p>
+                    <p>Oversees the bank's IT infrastructure and digital transformation initiatives. Ensures the security and efficiency of banking systems.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://cms.eastwestbanker.com/sites/default/files/2024-05/ASuzrez.jpg" alt="Juan Alfonso D. Suarez">
+                    <h3>Juan Alfonso D. Suarez</h3>
+                    <p><strong>Executive Vice President & Head – Human Resources</strong></p>
+                    <p>Manages talent acquisition, employee development, and organizational culture. Aligns HR strategies with the bank's business objectives.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/IUy.jpg" alt="Ivy B. Uy">
+                    <h3>Ivy B. Uy</h3>
+                    <p><strong>Executive Vice President & Head – Branch Banking</strong></p>
+                    <p>Oversees the operations of the bank's branch network. Focuses on operational efficiency and customer service excellence.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/DAng%20Tan%20Chai.jpg" alt="Daniel L. Ang Tan Chai">
+                    <h3>Daniel L. Ang Tan Chai</h3>
+                    <p><strong>Senior Vice President & Chief Finance Officer</strong></p>
+                    <p>Manages the bank's financial planning, reporting, and analysis. Ensures financial stability and compliance with regulatory requirements.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/RTamayo.jpg" alt="Richard Chester C. Tamayo">
+                    <h3>Richard Chester C. Tamayo</h3>
+                    <p><strong>Senior Vice President & Head – Wealth Management</strong></p>
+                    <p>Leads wealth management services, providing investment solutions to clients. Focuses on growing the bank's wealth management portfolio.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHeAUj7VM4RCylwl1nKJzHJbxxOXim-Gbn7g&s" alt="Aylwin Herminia P. Tamayo">
+                    <h3>Aylwin Herminia P. Tamayo</h3>
+                    <p><strong>Senior Vice President & Head – Credit Cards</strong></p>
+                    <p>Oversees the bank's credit card operations and product offerings. Develops strategies to enhance the credit card portfolio.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFC10md9I8G3A/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1723317029363?e=2147483647&v=beta&t=wi1fPUV5qvenZxGEiUQ58uA2GNuQ8rLWbGdL5mjLPTc" alt="Mylene C. Subido">
+                    <h3>Mylene C. Subido</h3>
+                    <p><strong>Senior Vice President & Head – Securities, Derivatives, Foreign Exchange Distribution</strong></p>
+                    <p>Manages the bank's trading and foreign exchange operations. Focuses on optimizing trading strategies and risk management.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://www.eastwestbanker.com/sites/default/files/2024-09/JTiamzon.jpg" alt="Joseph Gerard D. Tiamson">
+                    <h3>Joseph Gerard D. Tiamson</h3>
+                    <p><strong>Senior Vice President & Head – Bank Operations</strong></p>
+                    <p>Oversees the bank's operational processes and service delivery. Ensures operational efficiency and compliance with internal policies.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7VACbHnwxQ7N67Sr_Gx8GbNjcL1H0qNBoTQ&s" alt="Salvador R. Serrano">
+                    <h3>Salvador R. Serrano</h3>
+                    <p><strong>Senior Vice President & Head – Central Branch Operations</strong></p>
+                    <p>Manages the central operations of the bank's branch network. Focuses on standardizing processes and improving service quality.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Capital Structure Section -->
+        <div id="capital" class="section">
+            <h1>Capital Structure and Adequacy</h1>
+            <p>As of December 31, 2024, EastWest Bank reported strong capital adequacy and a solid capital structure, reflecting its robust financial health and compliance with regulatory requirements.</p>
+
+            <h2>📊 Capital Adequacy Ratios</h2>
+            <p>EastWest Bank's capital adequacy ratios as of December 31, 2024, were as follows:</p>
+
+            <ul>
+                <li><strong>Common Equity Tier 1 (CET1) Ratio:</strong> 13.31%</li>
+                <li><strong>Total Capital Ratio:</strong> 14.76%</li>
+            </ul>
+
+            <p>These ratios are well above the regulatory minimums, indicating a strong capital base.</p>
+            <p><em>Sources: <a href="https://s23.q4cdn.com/205723478/files/doc_financials/2024/q4/EWBC-99-1-8K-12-31-2024-vFINAL.pdf">Q4 Financials</a>, East West Bank</em></p>
+
+            <h2>💰 Capital Structure</h2>
+            <p>As of December 31, 2024, EastWest Bank's stockholders' equity was $7.7 billion, representing approximately 10.17% of total assets. The tangible common equity ratio stood at 9.37%, and the tangible book value per share was $52.39.</p>
+            <p><em>Sources: <a href="https://s23.q4cdn.com/205723478/files/doc_financials/2024/q4/EWBC-99-1-8K-12-31-2024-vFINAL.pdf">Q4 Financials</a>, East West Bank</em></p>
+
+            <h2>🏦 Subsidiaries and Affiliates</h2>
+            <p>EastWest Bank's capital structure is supported by its subsidiaries:</p>
+
+            <ul>
+                <li><strong>East West Rural Bank</strong></li>
+                <li><strong>East West Finance and Leasing Corp.</strong></li>
+                <li><strong>East West Insurance Brokerage Inc.</strong></li>
+            </ul>
+
+            <p>These subsidiaries contribute to the bank's diversified operations and revenue streams.</p>
+
+            <h2>✅ Regulatory Compliance</h2>
+            <p>EastWest Bank maintains a conservative approach to capital management, ensuring compliance with regulatory capital requirements. The bank's capital ratios exceed the minimum thresholds set by regulators, positioning it as a well-capitalized institution.</p>
+            <p><em>Source: East West Bank</em></p>
+        </div>
+
+        <!-- Corporate Governance Section -->
+        <div id="governance" class="section">
+            <h1>Corporate Governance</h1>
+            <p>EastWest Bank adheres to the highest standards of business ethics and corporate governance, without compromise. The bank's comprehensive governance framework ensures accountability, fairness, and transparency in all operations.</p>
+
+            <div style="margin-top: 20px; margin-bottom: 30px;">
+                <h2>🏛️ Corporate Governance Framework</h2>
+                <p>You can access the comprehensive Corporate Governance information of EastWest Bank through their <a href="https://www.eastwestbanker.com/about-us/corporate-governance" target="_blank" rel="noopener noreferrer">official website</a>. This section provides detailed insights into the bank's governance framework, including:</p>
+
+                <div style="margin-left: 20px; margin-top: 15px;">
+                    <h3>Manual on Corporate Governance</h3>
+                    <p>Outlines the rules, systems, and processes governing the performance of the Board of Directors and Management. The Manual establishes the structure by which the Bank executes and carries out its Corporate Governance responsibilities.</p>
+                    <p><em>Sources: EastWest Bank, East West Banker</em></p>
+
+                    <h3>Code of Business Conduct & Ethics</h3>
+                    <p>Sets standards of discipline and work ethics for employees to achieve an ethics-based work environment. This code guides employees in maintaining the highest standards of integrity and professionalism in their dealings with customers, stakeholders, and colleagues.</p>
+                    <p><em>Source: EastWest Bank</em></p>
+
+                    <h3>Integrated Annual Corporate Governance Reports</h3>
+                    <p>Provides annual reports on the bank's corporate governance practices, documenting compliance with regulatory requirements and industry best practices.</p>
+
+                    <h3>Board Committees</h3>
+                    <p>The Board is supported by seven specialized committees that assist in carrying out its roles and responsibilities:</p>
+                    <ul style="margin-left: 15px;">
+                        <li><strong>Corporate Governance and Compliance Committee:</strong> Leads in defining and fulfilling corporate governance policies and attaining best practices.</li>
+                        <li><strong>Audit Committee:</strong> Oversees the bank's financial reporting process, internal controls, and compliance monitoring.</li>
+                        <li><strong>Risk Management Committee:</strong> Assists in managing the bank's risk-taking activities and developing appropriate risk policies.</li>
+                        <li><strong>Trust Committee:</strong> Oversees the proper management and administration of trust and fiduciary business.</li>
+                        <li><strong>Rewards and Talent Management Committee:</strong> Focuses on executive development, succession planning, and compensation practices.</li>
+                        <li><strong>Related Party Transactions Committee:</strong> Reviews and evaluates related party transactions to ensure they are conducted at arm's length.</li>
+                        <li><strong>Executive Committee:</strong> Acts on behalf of the Board on matters requiring immediate attention between Board meetings.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <h2>🔍 Risk Management Framework</h2>
+                <p>EastWest Bank implements a robust risk management framework that identifies, measures, controls, and monitors risks across the organization. This framework ensures that the bank maintains its financial stability while pursuing growth opportunities.</p>
+
+                <h2>📝 Company Policies</h2>
+                <p>The bank has established comprehensive policies covering various aspects of its operations, including:</p>
+                <ul>
+                    <li>Anti-Money Laundering Policy</li>
+                    <li>Whistleblowing Policy</li>
+                    <li>Related Party Transactions Policy</li>
+                    <li>Dividend Policy</li>
+                    <li>Disclosure Policy</li>
+                </ul>
+                <p>These policies ensure compliance with regulatory requirements and promote transparent and ethical business practices.</p>
+                <p><em>For more information, visit the <a href="https://www.eastwestbanker.com/about-us/corporate-governance" target="_blank" rel="noopener noreferrer">Corporate Governance section</a> on EastWest Bank's official website.</em></p>
+            </div>
+        </div>
+
+        <!-- CSR Section -->
+        <div id="csr" class="section">
+            <h1>Corporate Social Responsibility</h1>
+            <p>EastWest Bank is committed to corporate social responsibility (CSR) through various initiatives that support community development, promote financial literacy, and address pressing social issues. Below are five notable CSR programs:</p>
+
+            <div style="margin-top: 25px;">
+                <h2>🎗️ Magenta Race – Virtual Run/Walk and Cycle for Breast Cancer Awareness</h2>
+                <p>EastWest Bank launched the Magenta Race, a virtual event aimed at raising funds for breast cancer detection and prevention. In its inaugural year, the initiative garnered significant participation from employees and the public, raising funds for the Philippine Foundation for Breast Care Inc. (PFBCI), also known as Kasuso.org. The event was recognized as the "Best CSR Initiative" at the 2023 Global Retail Banking Innovation Awards.</p>
+                <p><em>Sources: Manila Standard, EastWest Bank, LinkedIn</em></p>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="https://via.placeholder.com/500x300?text=Magenta+Race+Event" alt="Magenta Race Event" style="max-width: 100%; border-radius: 5px;">
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <h2>🏠 Affordable Housing and Homelessness Prevention</h2>
+                <p>EastWest Bank has been actively involved in supporting affordable housing initiatives and preventing homelessness. The bank has provided financing for transitional housing projects that offer safe discharge options for homeless patients, disabled adults, domestic violence victims, and recently incarcerated individuals. These facilities also provide workforce development programs to assist with employment and skills training.</p>
+                <p><em>Sources: East West Bank, Responsibility Reports</em></p>
+
+                <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 15px;">
+                    <h3>Key Outcomes:</h3>
+                    <ul>
+                        <li>Increased access to affordable housing for low-income families</li>
+                        <li>Support for transitional housing facilities</li>
+                        <li>Skill development programs for vulnerable populations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <h2>📚 Financial Literacy Programs</h2>
+                <p>In partnership with nonprofit organizations, EastWest Bank has implemented financial literacy programs aimed at empowering underserved communities. These programs provide individuals with the knowledge and tools to manage their finances effectively, promoting economic stability and upward mobility.</p>
+                <p>Through initiatives like Operation Hope and Junior Achievement, bank associates provide financial literacy classes in low- and moderate-income communities to deliver a message of empowerment and responsibility. The bank also partners with Virtual Enterprises International to give students practical business experiences that prepare them for financially-secure futures.</p>
+                <p><em>Source: East West Bank</em></p>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <h2>💼 Support for Small Businesses</h2>
+                <p>EastWest Bank supports small businesses through various initiatives, including providing microloans and business coaching. The bank has partnered with organizations like Grameen America to fund microloans for small businesses owned by women, particularly those from minority communities. Additionally, EastWest Bank has offered business coaching and financial resources to small business owners through partnerships with groups like the Greenlining Institute.</p>
+                <p>As a Small Business Administration (SBA) Preferred Lender, EastWest Bank helps businesses qualify for financing more easily and receive more flexible terms. Over 86% of their SBA loans nationwide were made to minority borrowers, reflecting their commitment to supporting diverse entrepreneurs.</p>
+                <p><em>Source: East West Bank</em></p>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <img src="https://via.placeholder.com/500x300?text=Small+Business+Support" alt="Small Business Support" style="max-width: 100%; border-radius: 5px;">
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <h2>🌱 Environmental and Social Investments</h2>
+                <p>EastWest Bank has committed significant resources to environmental and social investments. In 2022 and the first half of 2023, the bank made new commitments totaling:</p>
+                <ul>
+                    <li>$1.2 billion to support small business and community development</li>
+                    <li>$750 million to support affordable, senior, and transitional housing</li>
+                    <li>$600 million to support healthcare delivery and improved health outcomes</li>
+                </ul>
+                <p>These investments reflect the bank's dedication to promoting community development and addressing social challenges.</p>
+
+                <div style="background-color: #f0f7ff; padding: 15px; border-radius: 5px; margin-top: 15px; border-left: 4px solid #1565c0;">
+                    <p style="margin: 0;">For more information about EastWest Bank's community programs and CSR initiatives, visit their <a href="https://www.eastwestbank.com/en/company/community-programs" target="_blank" rel="noopener noreferrer">Community Programs page</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Statement Section -->
+        <div id="financial" class="section">
+            <h1>Financial Statement Reports</h1>
+            <h2>Financial Performance (2022-2024)</h2>
+
+            <div class="financial-container">
+                <div class="financial-overview">
+                    <p>East West Corporation has maintained strong financial performance over the past three years, with consistent growth in key financial metrics despite market challenges.</p>
+                </div>
+
+                <div class="financial-table-container">
+                    <h3>Income Statement (in Million PHP)</h3>
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th>2024</th>
+                                <th>2023</th>
+                                <th>2022</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total Interest Income</td>
+                                <td>45,892</td>
+                                <td>41,537</td>
+                                <td>38,125</td>
+                            </tr>
+                            <tr>
+                                <td>Total Interest Expense</td>
+                                <td>9,234</td>
+                                <td>8,547</td>
+                                <td>7,895</td>
+                            </tr>
+                            <tr>
+                                <td>Net Interest Income</td>
+                                <td>36,658</td>
+                                <td>32,990</td>
+                                <td>30,230</td>
+                            </tr>
+                            <tr>
+                                <td>Non-Interest Income</td>
+                                <td>9,875</td>
+                                <td>8,976</td>
+                                <td>7,845</td>
+                            </tr>
+                            <tr>
+                                <td>Operating Expenses</td>
+                                <td>26,432</td>
+                                <td>24,987</td>
+                                <td>23,564</td>
+                            </tr>
+                            <tr>
+                                <td>Provision for Credit Losses</td>
+                                <td>4,325</td>
+                                <td>4,785</td>
+                                <td>5,235</td>
+                            </tr>
+                            <tr>
+                                <td>Net Income</td>
+                                <td>12,876</td>
+                                <td>10,234</td>
+                                <td>7,895</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="financial-table-container">
+                    <h3>Balance Sheet Highlights (in Million PHP)</h3>
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th>2024</th>
+                                <th>2023</th>
+                                <th>2022</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total Assets</td>
+                                <td>452,678</td>
+                                <td>425,432</td>
+                                <td>398,765</td>
+                            </tr>
+                            <tr>
+                                <td>Total Loans</td>
+                                <td>312,456</td>
+                                <td>295,342</td>
+                                <td>273,654</td>
+                            </tr>
+                            <tr>
+                                <td>Total Deposits</td>
+                                <td>358,972</td>
+                                <td>332,587</td>
+                                <td>310,245</td>
+                            </tr>
+                            <tr>
+                                <td>Shareholders' Equity</td>
+                                <td>65,432</td>
+                                <td>58,765</td>
+                                <td>52,342</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="financial-table-container">
+                    <h3>Key Financial Ratios</h3>
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th>Ratio</th>
+                                <th>2024</th>
+                                <th>2023</th>
+                                <th>2022</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Return on Assets (ROA)</td>
+                                <td>2.85%</td>
+                                <td>2.41%</td>
+                                <td>1.98%</td>
+                            </tr>
+                            <tr>
+                                <td>Return on Equity (ROE)</td>
+                                <td>19.67%</td>
+                                <td>17.42%</td>
+                                <td>15.08%</td>
+                            </tr>
+                            <tr>
+                                <td>Net Interest Margin</td>
+                                <td>8.10%</td>
+                                <td>7.75%</td>
+                                <td>7.58%</td>
+                            </tr>
+                            <tr>
+                                <td>Cost to Income Ratio</td>
+                                <td>56.79%</td>
+                                <td>59.47%</td>
+                                <td>61.82%</td>
+                            </tr>
+                            <tr>
+                                <td>Capital Adequacy Ratio</td>
+                                <td>15.78%</td>
+                                <td>15.21%</td>
+                                <td>14.65%</td>
+                            </tr>
+                            <tr>
+                                <td>Non-Performing Loan Ratio</td>
+                                <td>2.32%</td>
+                                <td>2.65%</td>
+                                <td>3.12%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="financial-highlights">
+                    <h3>Financial Highlights</h3>
+                    <ul>
+                        <li><strong>Sustained Growth:</strong> Net income increased by 25.8% in 2024 compared to 2023, following a 29.6% growth in 2023.</li>
+                        <li><strong>Asset Quality:</strong> Improved non-performing loan ratio from 3.12% in 2022 to 2.32% in 2024, reflecting stronger credit risk management.</li>
+                        <li><strong>Cost Efficiency:</strong> Consistent improvement in cost-to-income ratio from 61.82% in 2022 to 56.79% in 2024.</li>
+                        <li><strong>Strong Capital Position:</strong> Capital adequacy ratio of 15.78% in 2024, well above regulatory requirements.</li>
+                        <li><strong>Deposit Growth:</strong> Customer deposits increased by 15.7% over the three-year period, demonstrating strong customer trust.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="financial-notes">
+                <p><strong>Note:</strong> All financial information presented is based on audited financial statements for the respective fiscal years. For detailed reports, please refer to our <a href="#" class="annual-reports-link">Annual Reports</a> or contact our Investor Relations department.</p>
+            </div>
+
+            <div class="annual-reports-dropdown" style="display: none; position: absolute; z-index: 100;">
+                <div class="dropdown-glass-panel">
+                    <h4><i class="fas fa-file-pdf"></i> Annual Reports</h4>
+                    <ul>
+                        <li>
+                            <a href="https://s23.q4cdn.com/205723478/files/doc_financials/2024/ar/2024-EWB-Annual-Report-Final-High-Res.pdf" target="_blank">
+                                <div class="year">2024</div>
+                                <div class="report-info">
+                                    <span>Annual Report</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.sec.gov/Archives/edgar/data/1069157/000106915724000036/ewbart2023annualreport0319.pdf" target="_blank">
+                                <div class="year">2023</div>
+                                <div class="report-info">
+                                    <span>Annual Report</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.sec.gov/Archives/edgar/data/1069157/000106915723000036/ewbart2022annualreport0319.pdf" target="_blank">
+                                <div class="year">2022</div>
+                                <div class="report-info">
+                                    <span>Annual Report</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <style>
+                .financial-container {
+                    margin-top: 25px;
+                }
+
+                .financial-table-container {
+                    margin-bottom: 30px;
+                    overflow-x: auto;
+                }
+
+                .financial-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 15px;
+                }
+
+                .financial-table th, .financial-table td {
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    text-align: right;
+                }
+
+                .financial-table th:first-child, .financial-table td:first-child {
+                    text-align: left;
+                    font-weight: 500;
+                }
+
+                .financial-table th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                }
+
+                .financial-table tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+
+                .financial-table tr:hover {
+                    background-color: #f0f7ff;
+                }
+
+                .financial-highlights {
+                    margin-top: 20px;
+                    margin-bottom: 30px;
+                }
+
+                .financial-highlights ul {
+                    margin-left: 20px;
+                }
+
+                .financial-highlights li {
+                    margin-bottom: 10px;
+                }
+
+                .financial-notes {
+                    margin-top: 30px;
+                    padding: 15px;
+                    background-color: #f5f5f5;
+                    border-radius: 5px;
+                    font-size: 0.9em;
+                }
+
+                @media (max-width: 768px) {
+                    .financial-table {
+                        font-size: 0.85em;
+                    }
+
+                    .financial-table th, .financial-table td {
+                        padding: 8px 5px;
+                    }
+                }
+            </style>
+        </div>
+
+        <!-- Team Section -->
+        <div id="team" class="section" data-aos="fade-up">
+            <h1>Our Team</h1>
+            <p>Meet the talented individuals behind this project who collaborated to bring together the comprehensive information about East West Corporation.</p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <div class="team-image-container">
+                                <img src="https://scontent.fcgy2-1.fna.fbcdn.net/v/t39.30808-6/492139124_1042667674591765_6402644424540871414_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeGNsb1-mB3vNgtu6xypxPyiq5Kz31OoVcGrkrPfU6hVwXJkU57nnzAGh2YCa6zbvJwBmlFaxDNKb4h8bDkiyisi&_nc_ohc=xW9ERnMGX6cQ7kNvwETvMoY&_nc_oc=AdlZdmhesOJb9cX1ER5nt8AC8ob0BZ4AlK4jK3bgVvN5PAMXf_c4Uk6KOzDWfv5XCLE&_nc_zt=23&_nc_ht=scontent.fcgy2-1.fna&_nc_gid=8jzW4_0fFcT35oqeaxUMTA&oh=00_AfF9G9kSnElW9QPtRUe34jrMeuSckECBi8_i9VL8O__7HA&oe=680E8810" alt="Jane Doe">
+                            </div>
+                            <div class="team-info-preview">
+                                <h3>Cawasan, Jovy P.</h3>
+                                <p>BSBA STUDENT</p>
+                            </div>
+                        </div>
+                        <div class="team-card-back">
+                            <h3>Cawasan, Jovy P.</h3>
+                            <p class="team-title">BSBA STUDENT</p>
+                            <!-- <div class="team-skills">
+                                <span>Financial Analysis</span>
+                                <span>Corporate Research</span>
+                                <span>Data Visualization</span>
+                            </div> -->
+                            <div class="team-social">
+                                <a href="#" class="team-social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-github"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <div class="team-image-container">
+                                <img src="https://scontent.fcgy2-1.fna.fbcdn.net/v/t39.30808-6/492538950_122263429700007940_3756914100517518686_n.jpg?stp=dst-jpg_s720x720_tt6&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE1AIBubYyuawIqaGI9qK5jEw08clVBtxcTDTxyVUG3FxFv-Lr0FV9UEVuJNRn03Bv0mNEdcpJ_z9-TN43-0AGK&_nc_ohc=aBRLb1ThpNsQ7kNvwFiZGjp&_nc_oc=AdnQdAhpCO9L2-Sq1OX9nA8jlTNM-tC3Wx5uw93ds1ZJ9v8f8vsJtTvVULlDgMWDgEk&_nc_zt=23&_nc_ht=scontent.fcgy2-1.fna&_nc_gid=nNR2dLzNgPhffjgfxt8wWg&oh=00_AfE_DDl9b3SK_SGki0vS0qKrzzKbpPF2fo1kyGkOcJQzig&oe=680E9970" alt="John Smith">
+                            </div>
+                            <div class="team-info-preview">
+                                <h3>Madulin, Meraiah</h3>
+                                <p>BSBA STUDENT</p>
+                            </div>
+                        </div>
+                        <div class="team-card-back">
+                            <h3>Madulin, Meraiah</h3>
+                            <p class="team-title">BSBA STUDENT</p>
+                            <!-- <div class="team-skills">
+                                <span>HTML/CSS</span>
+                                <span>JavaScript</span>
+                                <span>UI/UX Design</span>
+                            </div> -->
+                            <div class="team-social">
+                                <a href="#" class="team-social-icon"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fab fa-github"></i></a>
+                                <a href="#" class="team-social-icon"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .team-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 30px;
+                    margin-top: 40px;
+                }
+
+                .team-card {
+                    background-color: transparent;
+                    perspective: 1000px;
+                    height: 450px;
+                }
+
+                .team-card-inner {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    transition: transform 0.8s;
+                    transform-style: preserve-3d;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                    border-radius: 15px;
+                }
+
+                .team-card:hover .team-card-inner {
+                    transform: rotateY(180deg);
+                }
+
+                .team-card-front, .team-card-back {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    -webkit-backface-visibility: hidden;
+                    backface-visibility: hidden;
+                    border-radius: 15px;
+                    overflow: hidden;
+                }
+
+                .team-card-front {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.18);
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                body.dark-mode .team-card-front {
+                    background: rgba(30, 30, 30, 0.7);
+                }
+
+                .team-card-back {
+                    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+                    color: white;
+                    transform: rotateY(180deg);
+                    padding: 25px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .team-image-container {
+                    height: 350px;
+                    overflow: hidden;
+                }
+
+                .team-image-container img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.5s ease;
+                }
+
+                .team-card:hover .team-image-container img {
+                    transform: scale(1.1);
+                }
+
+                .team-info-preview {
+                    padding: 15px;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .team-info-preview h3 {
+                    margin: 0 0 5px;
+                    color: var(--primary-color);
+                    font-size: 20px;
+                }
+
+                body.dark-mode .team-info-preview h3 {
+                    color: var(--accent-color);
+                }
+
+                .team-info-preview p {
+                    margin: 0;
+                    color: var(--secondary-color);
+                    font-weight: 500;
+                }
+
+                body.dark-mode .team-info-preview p {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+
+                .team-card-back h3 {
+                    margin: 0 0 5px;
+                    font-size: 22px;
+                }
+
+                .team-title {
+                    margin: 0 0 20px;
+                    opacity: 0.8;
+                    font-weight: 500;
+                }
+
+                .team-bio {
+                    font-size: 14px;
+                    line-height: 1.6;
+                    margin-bottom: 25px;
+                }
+
+                .team-skills {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    justify-content: center;
+                    margin-bottom: 25px;
+                }
+
+                .team-skills span {
+                    background: rgba(255, 255, 255, 0.2);
+                    padding: 5px 12px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+
+                .team-social {
+                    display: flex;
+                    gap: 15px;
+                }
+
+                .team-social-icon {
+                    width: 40px;
+                    height: 40px;
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                }
+
+                .team-social-icon:hover {
+                    background: rgba(255, 255, 255, 0.4);
+                    transform: translateY(-5px);
+                }
+
+                @media (max-width: 768px) {
+                    .team-grid {
+                        grid-template-columns: 1fr;
+                        max-width: 350px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                }
+            </style>
+        </div>
+
+        <!-- References Section -->
+        <div id="references" class="section" data-aos="fade-up">
+            <h1>References</h1>
+            <p>This website has been created using data collected from various reputable sources. We acknowledge and appreciate the following resources that made this compilation possible.</p>
+
+            <div class="references-container">
+                <div class="reference-category">
+                    <h2><i class="fas fa-university"></i> Corporate Information</h2>
+                    <ul class="reference-list">
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">East West Bank Official Website</span>
+                                <a href="https://www.eastwestbanker.com" target="_blank" class="reference-link">eastwestbanker.com <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Philippines Business Database</span>
+                                <a href="#" target="_blank" class="reference-link">Philippines Business Database <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">East West Bank Annual Reports (2022-2024)</span>
+                                <span class="reference-description">Comprehensive financial data and corporate highlights</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="reference-category">
+                    <h2><i class="fas fa-chart-line"></i> Financial Information</h2>
+                    <ul class="reference-list">
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Q4 Financials 2024</span>
+                                <a href="https://s23.q4cdn.com/205723478/files/doc_financials/2024/q4/EWBC-99-1-8K-12-31-2024-vFINAL.pdf" target="_blank" class="reference-link">Q4 Financial Report <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">SEC Archives</span>
+                                <a href="https://www.sec.gov/Archives/edgar/data/1069157/" target="_blank" class="reference-link">SEC Edgar Database <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Yahoo Finance</span>
+                                <a href="https://finance.yahoo.com/" target="_blank" class="reference-link">finance.yahoo.com <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="reference-category">
+                    <h2><i class="fas fa-newspaper"></i> News & Press Releases</h2>
+                    <ul class="reference-list">
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Manila Standard</span>
+                                <a href="https://manilastandard.net/" target="_blank" class="reference-link">manilastandard.net <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Press Release Services</span>
+                                <span class="reference-description">Various corporate announcements and industry news</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Responsibility Reports</span>
+                                <span class="reference-description">Corporate social responsibility initiatives and reports</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="reference-category">
+                    <h2><i class="fas fa-award"></i> Awards & Recognition Information</h2>
+                    <ul class="reference-list">
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">International Finance Magazine</span>
+                                <a href="https://internationalfinance.com/" target="_blank" class="reference-link">internationalfinance.com <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Asian Banking and Finance</span>
+                                <a href="https://asianbankingandfinance.net/" target="_blank" class="reference-link">asianbankingandfinance.net <i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="reference-item">
+                                <span class="reference-name">Digital Banker's Digital CX Awards</span>
+                                <span class="reference-description">Industry recognition and awards information</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <style>
+                .references-container {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+                    gap: 30px;
+                    margin-top: 30px;
+                }
+
+                .reference-category {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(10px);
+                    border-radius: 15px;
+                    padding: 25px;
+                    border: 1px solid var(--glass-border);
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+                    transition: all 0.4s ease;
+                }
+
+                body.dark-mode .reference-category {
+                    background: rgba(30, 30, 30, 0.7);
+                }
+
+                .reference-category:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+                }
+
+                .reference-category h2 {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: var(--primary-color);
+                    margin-top: 0;
+                    padding-bottom: 15px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                }
+
+                body.dark-mode .reference-category h2 {
+                    color: var(--accent-color);
+                    border-bottom-color: rgba(255, 255, 255, 0.05);
+                }
+
+                .reference-category h2::before {
+                    display: none;
+                }
+
+                .reference-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .reference-list li {
+                    margin-bottom: 15px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+                }
+
+                body.dark-mode .reference-list li {
+                    border-bottom-color: rgba(255, 255, 255, 0.05);
+                }
+
+                .reference-list li:last-child {
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    border-bottom: none;
+                }
+
+                .reference-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                }
+
+                .reference-name {
+                    font-weight: 500;
+                    color: var(--primary-color);
+                }
+
+                body.dark-mode .reference-name {
+                    color: rgba(255, 255, 255, 0.9);
+                }
+
+                .reference-description {
+                    font-size: 14px;
+                    color: #666;
+                    font-style: italic;
+                }
+
+                body.dark-mode .reference-description {
+                    color: rgba(255, 255, 255, 0.6);
+                }
+
+                .reference-link {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 5px;
+                    color: var(--secondary-color);
+                    text-decoration: none;
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+                }
+
+                .reference-link i {
+                    font-size: 12px;
+                    transition: transform 0.3s ease;
+                }
+
+                .reference-link:hover {
+                    color: var(--accent-color);
+                }
+
+                .reference-link:hover i {
+                    transform: translateX(3px);
+                }
+
+                @media (max-width: 768px) {
+                    .references-container {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+        </div>
+
+        <!-- Disclaimer Section -->
+        <div id="disclaimer" class="section" data-aos="fade-up">
+            <h1>Disclaimer</h1>
+
+            <div class="disclaimer-content">
+                <div class="disclaimer-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+
+                <div class="disclaimer-text">
+                    <h2>Educational Purposes Only</h2>
+                    <p>This website has been created exclusively for educational and academic purposes. It is not an official representation of EastWest Bank or any of its affiliates.</p>
+
+                    <h3>Important Information:</h3>
+                    <ul>
+                        <li>The content provided on this website is for informational and educational purposes only.</li>
+                        <li>This is not an official website of EastWest Bank or East West Banking Corporation.</li>
+                        <li>The information presented has been compiled from publicly available sources and may not be current or accurate.</li>
+                        <li>Any financial data, statistics, or other information should not be relied upon for making investment or financial decisions.</li>
+                        <li>The creators of this website are not affiliated with, endorsed by, or connected to EastWest Bank in any official capacity.</li>
+                        <li>Any logos, trademarks, or brand elements used are the property of their respective owners and are used here solely for educational illustration.</li>
+                    </ul>
+
+                    <h3>No Financial Advice:</h3>
+                    <p>The financial information presented on this website does not constitute financial advice, investment advice, or any other kind of advice. Users should consult with qualified financial professionals before making any financial or investment decisions.</p>
+
+                    <h3>Contact Information:</h3>
+                    <p>If you are looking for official information about EastWest Bank, please visit their official website at <a href="https://www.eastwestbanker.com" target="_blank">eastwestbanker.com</a> or contact them directly through their official channels.</p>
+
+                    <h3>Academic Project:</h3>
+                    <p>This website was created as part of an academic project to demonstrate web development and information presentation skills. All content is intended for educational purposes only.</p>
+                </div>
+            </div>
+
+            <style>
+                .disclaimer-content {
+                    display: flex;
+                    gap: 30px;
+                    margin-top: 30px;
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(10px);
+                    border-radius: 15px;
+                    overflow: hidden;
+                    border: 1px solid var(--glass-border);
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+                }
+
+                body.dark-mode .disclaimer-content {
+                    background: rgba(30, 30, 30, 0.7);
+                }
+
+                .disclaimer-icon {
+                    flex: 0 0 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+                    color: white;
+                    font-size: 40px;
+                }
+
+                .disclaimer-text {
+                    flex: 1;
+                    padding: 30px;
+                }
+
+                .disclaimer-text h2 {
+                    margin-top: 0;
+                    color: var(--primary-color);
+                    font-size: 24px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                    padding-bottom: 15px;
+                    margin-bottom: 20px;
+                }
+
+                .disclaimer-text h2::before {
+                    display: none;
+                }
+
+                body.dark-mode .disclaimer-text h2 {
+                    color: var(--accent-color);
+                    border-bottom-color: rgba(255, 255, 255, 0.1);
+                }
+
+                .disclaimer-text h3 {
+                    color: var(--secondary-color);
+                    margin: 25px 0 10px;
+                    font-size: 18px;
+                }
+
+                body.dark-mode .disclaimer-text h3 {
+                    color: var(--accent-color);
+                }
+
+                .disclaimer-text ul {
+                    padding-left: 20px;
+                }
+
+                .disclaimer-text li {
+                    margin-bottom: 10px;
+                    position: relative;
+                }
+
+                .disclaimer-text a {
+                    color: var(--secondary-color);
+                    text-decoration: none;
+                    border-bottom: 1px dashed;
+                    transition: all 0.3s ease;
+                }
+
+                .disclaimer-text a:hover {
+                    color: var(--accent-color);
+                }
+
+                @media (max-width: 768px) {
+                    .disclaimer-content {
+                        flex-direction: column;
+                    }
+
+                    .disclaimer-icon {
+                        height: 100px;
+                    }
+                }
+            </style>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loader
+            const loader = document.querySelector('.loader');
+            setTimeout(() => {
+                loader.classList.add('hide');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+
+                    // Initialize AOS for elements other than sections
+                    AOS.init({
+                        once: true,
+                        mirror: false,
+                        disable: 'mobile'
+                    });
+                }, 300);
+            }, 1500);
+
+            // Dark/Light mode toggle
+            const modeSwitch = document.getElementById('mode-switch');
+            const modeLabel = document.getElementById('mode-label');
+
+            modeSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('dark-mode');
+                    modeLabel.textContent = 'Dark Mode';
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    modeLabel.textContent = 'Light Mode';
+                }
+            });
+
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+
+            if (window.innerWidth <= 992) {
+                menuToggle.style.display = 'flex';
+            }
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 992) {
+                    menuToggle.style.display = 'flex';
+                } else {
+                    menuToggle.style.display = 'none';
+                    sidebar.classList.remove('active');
+                }
+            });
+
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+            });
+
+            // Back to top button
+            const backToTopButton = document.querySelector('.back-to-top');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Annual Reports dropdown functionality
+            const annualReportsLink = document.querySelector('.annual-reports-link');
+            const annualReportsDropdown = document.querySelector('.annual-reports-dropdown');
+
+            if (annualReportsLink && annualReportsDropdown) {
+                annualReportsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // Position the dropdown near the link
+                    const linkRect = annualReportsLink.getBoundingClientRect();
+                    annualReportsDropdown.style.top = (window.scrollY + linkRect.bottom + 10) + 'px';
+                    annualReportsDropdown.style.left = (window.scrollX + linkRect.left - 100) + 'px';
+
+                    // Toggle the dropdown with animation
+                    if (annualReportsDropdown.style.display === 'none' || !annualReportsDropdown.style.display) {
+                        annualReportsDropdown.style.display = 'block';
+                        setTimeout(() => {
+                            annualReportsDropdown.classList.add('show');
+                        }, 10);
+                    } else {
+                        annualReportsDropdown.classList.remove('show');
+                        setTimeout(() => {
+                            annualReportsDropdown.style.display = 'none';
+                        }, 500); // Match the transition duration
+                    }
+                });
+
+                // Close dropdown when clicking elsewhere
+                document.addEventListener('click', function(e) {
+                    if (!annualReportsLink.contains(e.target) && !annualReportsDropdown.contains(e.target)) {
+                        annualReportsDropdown.classList.remove('show');
+                        setTimeout(() => {
+                            annualReportsDropdown.style.display = 'none';
+                        }, 500); // Match the transition duration
+                    }
+                });
+
+                // Add hover animations to dropdown items
+                const dropdownItems = annualReportsDropdown.querySelectorAll('li');
+                dropdownItems.forEach((item, index) => {
+                    item.style.transform = 'translateY(20px)';
+                    item.style.opacity = '0';
+                    item.style.transition = `all 0.3s ease ${index * 0.1}s`;
+
+                    annualReportsDropdown.addEventListener('transitionend', function(e) {
+                        if (e.propertyName === 'opacity' && annualReportsDropdown.classList.contains('show')) {
+                            item.style.transform = 'translateY(0)';
+                            item.style.opacity = '1';
+                        } else if (e.propertyName === 'opacity' && !annualReportsDropdown.classList.contains('show')) {
+                            item.style.transform = 'translateY(20px)';
+                            item.style.opacity = '0';
+                        }
+                    });
+                });
+            }
+
+            // Highlight active menu item based on scroll position
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            function setActiveNavItem() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    const href = item.querySelector('a').getAttribute('href').substring(1);
+                    if (href === current) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', setActiveNavItem);
+            setActiveNavItem(); // Set active on page load
+
+            // Add tilt effect to profile cards
+            const profileCards = document.querySelectorAll('.profile-card');
+
+            profileCards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // x position within the card
+                    const y = e.clientY - rect.top; // y position within the card
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const deltaX = (x - centerX) / centerX * 10; // Max tilt of 10 degrees
+                    const deltaY = (y - centerY) / centerY * 10;
+
+                    this.style.transform = `perspective(1000px) rotateX(${-deltaY}deg) rotateY(${deltaX}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    }, 300);
+                });
+            });
+
+            // Add interactive effects to tables
+            const financialTables = document.querySelectorAll('.financial-table');
+
+            financialTables.forEach(table => {
+                const rows = table.querySelectorAll('tbody tr');
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+
+                    row.addEventListener('mouseenter', function() {
+                        cells.forEach((cell, index) => {
+                            cell.style.transition = `transform 0.3s ease ${index * 0.05}s, background-color 0.3s ease`;
+                            cell.style.transform = 'translateY(-2px)';
+                        });
+                    });
+
+                    row.addEventListener('mouseleave', function() {
+                        cells.forEach(cell => {
+                            cell.style.transform = '';
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Page Navigation System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable AOS animations for sections to prevent content disappearing
+            document.querySelectorAll('.section').forEach(section => {
+                section.removeAttribute('data-aos');
+                section.removeAttribute('data-aos-delay');
+                section.removeAttribute('data-aos-duration');
+            });
+
+            // Get all sections
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            // Set up navigation menu click handlers
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+
+                    // Update active nav item
+                    navItems.forEach(navItem => navItem.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Set up next/prev button handlers
+            const nextButtons = document.querySelectorAll('.next-page');
+            const prevButtons = document.querySelectorAll('.prev-page');
+
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextSectionId = this.getAttribute('data-next');
+                    if (nextSectionId) {
+                        showSection(nextSectionId);
+
+                        // Update active nav item
+                        navItems.forEach(navItem => {
+                            navItem.classList.remove('active');
+                            if (navItem.getAttribute('data-section') === nextSectionId) {
+                                navItem.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevSectionId = this.getAttribute('data-prev');
+                    if (prevSectionId) {
+                        showSection(prevSectionId);
+
+                        // Update active nav item
+                        navItems.forEach(navItem => {
+                            navItem.classList.remove('active');
+                            if (navItem.getAttribute('data-section') === prevSectionId) {
+                                navItem.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Function to show a specific section
+            function showSection(sectionId) {
+                // Hide all sections
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    section.style.display = 'none'; // Ensure sections are hidden
+                    // Remove AOS attributes to prevent disappearing content
+                    section.removeAttribute('data-aos');
+                    section.removeAttribute('data-aos-delay');
+                    section.removeAttribute('data-aos-duration');
+                });
+
+                // Show the selected section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.style.display = 'block'; // First make it visible
+                    // Force reflow to ensure display change is applied before adding the active class
+                    void targetSection.offsetHeight;
+                    targetSection.classList.add('active');
+
+                    // Scroll to top of section without smooth scrolling
+                    window.scrollTo(0, 0);
+                }
+            }
+
+            // Show the home section by default
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
